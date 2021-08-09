@@ -1,0 +1,26 @@
+<% if @item.errors.any? %>
+    <h3><%= @item.errors.count %> error prohibited this item from being saved:</h3>
+    <ul>
+      <% @item.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+ <% end %>
+
+<h2>商品新規登録</h2>
+
+<%= form_with model: [:admin, @item], local:true do |f| %>
+  <p>商品画像</p>
+  <%= f.attachment_field :image %>
+  <p>商品名</p>
+  <%= f.text_field :name, placeholder: "商品名" %>
+  <p>商品説明</p>
+  <%= f.text_area :introduction, placeholder: "ここに説明文を記述します" %>
+  <p>ジャンル</p>
+  <%= f.collection_select :genre_id, Genre.all, :id, :name, :prompt => "--選択してください--" %>
+  <p>税抜価格</p>
+  <%= f.text_field :price, placeholder: "1000" %>円
+  <p>販売ステータス</p>
+  <%= f.radio_button :is_active, "true", checked: true %>販売中 <%=f.radio_button :is_active, "false" %>販売停止中
+  <%= f.submit '新規登録' %>
+<% end %>
