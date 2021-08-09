@@ -1,0 +1,4 @@
+<%= attachment_image_tag @item, :image %>
+<h2><%= @item.name %></h2>
+<p><%= @item.introduction %></p>
+<p>¥<%= @item.add_tax_price.to_s(:delimited) %></p>

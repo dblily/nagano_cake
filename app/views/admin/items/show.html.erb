@@ -4,7 +4,7 @@
   <p>商品説明：<%= @item.introduction %></p>
   <p>ジャンル：<%= @item.genre.name %></p>
   <p>税抜価格：<%= @item.price.to_s(:delimited) %></p>
-  <p>税込み価格：<%= @item.add_tax_price.to_s(:delimited) %></p>
+  <p>税込価格：<%= @item.add_tax_price.to_s(:delimited) %></p>
   <p>販売ステータス：<%= @item.is_active ? '販売中' : '販売停止中' %></p>
   
   <%= link_to "編集する", edit_admin_item_path %>
