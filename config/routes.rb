@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get '/about' => 'homes#about', as: 'about'
 
   namespace :admin do
+    resources :customers, except: [:new, :create, :destroy]
     resources :items, except: [:destroy]
     resources :genres, except: [:show, :new, :destroy]
   end
@@ -13,6 +14,7 @@ Rails.application.routes.draw do
     get '/customers/leave' => 'customers#leave', as: 'customers_leave'
     patch '/customers/withdraw' => 'customers#withdraw', as: 'customers_withdraw'
     resources :items, only: [:index, :show]
+    resources :addresses, except: [:show, :new]
   end
   
   devise_for :admin, controllers: {

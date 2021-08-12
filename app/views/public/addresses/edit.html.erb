@@ -1,0 +1,17 @@
+<% if @address.errors.any? %>
+    <h3><%= @address.errors.count %> error prohibited this item from being saved:</h3>
+    <ul>
+      <% @address.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+ <% end %>
+
+<h2>配送先編集</h2>
+
+<%= form_with model:@address, local:true do |f| %>
+  <p>郵便番号(ハイフンなし)<%= f.text_field :postal_code %></p>
+  <p>住所<%= f.text_field :address %></p>
+  <p>宛名<%= f.text_field :name %></p>
+  <%= f.submit '変更内容を保存' %>
+<% end %>
