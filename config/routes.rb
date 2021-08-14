@@ -14,6 +14,8 @@ Rails.application.routes.draw do
     get '/customers/leave' => 'customers#leave', as: 'customers_leave'
     patch '/customers/withdraw' => 'customers#withdraw', as: 'customers_withdraw'
     resources :items, only: [:index, :show]
+    resources :cart_items, except: [:new, :show, :edit]
+    delete '/cart_items/destroy_all/:id' => 'cart_items#destroy_all', as: 'cart_items_destroy_all'
     resources :addresses, except: [:show, :new]
   end
   

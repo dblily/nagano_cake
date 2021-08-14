@@ -1,4 +1,12 @@
+
+
 <%= attachment_image_tag @item, :image %>
 <h2><%= @item.name %></h2>
 <p><%= @item.introduction %></p>
-<p>¥<%= @item.add_tax_price.to_s(:delimited) %></p>
+<p>¥<%= @item.add_tax_price.to_s(:delimited) %>(税込)</p>
+
+<%= form_with model:@cart_item, url:cart_items_path, local:true do |f| %>
+  <%= f.select :amount, *[1..5], :prompt => "個数選択" %>
+  <%= f.hidden_field :item_id, :value => @item.id %>
+  <%= f.submit 'カートに入れる' %>
+<% end %>
