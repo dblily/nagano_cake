@@ -1,11 +1,20 @@
 <h2>商品一覧</h2>
 
-<% @items.each do |item| %>
-  <%= attachment_image_tag item, :image %>
-  <%= link_to item_path(item) do %>
-      <%= item.name %>
+<h3>ジャンル検索</h3>
+<% @genres.each do |genre| %>
+  <p>
+    <%= link_to items_path(genre_id: genre.id) do %>
+      <%= genre.name %>
     <% end %>
-  
-  <p>¥<%= item.price.to_s(:delimited) %></p>
+  </p>
+<% end %>
+
+<h3><%= @name + '一覧（全' + @count.to_s + '件）' %></h3>
+<% @items.each do |item| %>
+  <%= attachment_image_tag item, :image, :fill, 50, 50 %>
+  <%= link_to item_path(item) do %>
+    <%= item.name %>
+  <% end %>
+  <%= '¥' + item.price.to_s(:delimited) %></p>
 <% end %>
   

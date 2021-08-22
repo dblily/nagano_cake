@@ -13,9 +13,16 @@ Rails.application.routes.draw do
     resource :customers, only: [:show, :edit, :update]
     get '/customers/leave' => 'customers#leave', as: 'customers_leave'
     patch '/customers/withdraw' => 'customers#withdraw', as: 'customers_withdraw'
+    
     resources :items, only: [:index, :show]
+    
     resources :cart_items, except: [:new, :show, :edit]
     delete '/cart_items/destroy_all/:id' => 'cart_items#destroy_all', as: 'cart_items_destroy_all'
+    
+    post '/orders/comfirm' => 'orders#comfirm', as: 'orders_comfirm'
+    get '/orders/thanks' => 'orders#thanks', as: 'orders_thanks'
+    resources :orders, except: [:edit, :update, :destroy]
+    
     resources :addresses, except: [:show, :new]
   end
   

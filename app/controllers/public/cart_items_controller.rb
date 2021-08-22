@@ -4,17 +4,28 @@ class Public::CartItemsController < ApplicationController
   end
   
   def create
-    cart_item = CartItem.new(cart_item_params)
-    cart_item.customer_id = current_customer.id
-    if cart_item.save
-      redirect_to cart_items_path, notice: 'successfully'
+    if params[:cart_item][:amount].present?
+    
+      if current_customer.cart_items.find_by(item_id: params[:cart_item][:item_id]) 
+        cart_item = current_customer.cart_items.find_by(item_id: params[:cart_item][:item_id])
+        cart_item.amount += params[:cart_item][:amount].to_i
+      else
+        cart_item = CartItem.new(cart_item_params)
+      end
+    
+      cart_item.customer_id = current_customer.id
+      cart_item.save
+      redirect_to items_path, notice: 'successfully'
+      
     else
-      @item = Item.find(params[:id])
-      render item_path(cart_item)
+      redirect_to item_path(params[:cart_item][:item_id]), alert: '個数を選択してください'
     end
   end
   
   def update
+    cart_item = CartItem.find(params[:id])
+    cart_item.update(cart_item_params)
+    redirect_to cart_items_path, notice: 'successfully'
   end
   
   def destroy
