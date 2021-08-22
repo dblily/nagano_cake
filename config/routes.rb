@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get '/about' => 'homes#about', as: 'about'
 
   namespace :admin do
+    get '/' => 'homes#top', as: 'top'
     resources :customers, except: [:new, :create, :destroy]
     resources :items, except: [:destroy]
     resources :genres, except: [:show, :new, :destroy]
