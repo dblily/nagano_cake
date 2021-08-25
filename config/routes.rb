@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     resources :customers, except: [:new, :create, :destroy]
     resources :items, except: [:destroy]
     resources :genres, except: [:show, :new, :destroy]
+    resources :orders, only: [:show, :update]
+    resources :order_items, only: [:update]
   end
   
   scope module: :public do
