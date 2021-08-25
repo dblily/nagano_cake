@@ -6,11 +6,11 @@ class ApplicationController < ActionController::Base
       when Admin
         admin_top_path
       when Customer
-        root_path
-      end
+        customers_path
+    end
   end
-
-
+  
+  
   protected
     def configure_permitted_parameters
       devise_parameter_sanitizer.permit(:sign_up, keys: [:last_name, :first_name, :last_name_kana, :first_name_kana, :postal_code, :address, :telephone_number])

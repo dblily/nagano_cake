@@ -9,14 +9,19 @@ class Admin::Admin::SessionsController < Devise::SessionsController
   # end
 
   # POST /resource/sign_in
-  # def create
-  #   super
-  # end
-
+  def create
+    super
+    flash.delete(:notice)
+  end
+  
   # DELETE /resource/sign_out
   # def destroy
   #   super
   # end
+
+  def after_sign_out_path_for(resource)
+    new_admin_session_path
+  end
 
   # protected
 

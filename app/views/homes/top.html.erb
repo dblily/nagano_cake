@@ -1,8 +1,25 @@
-<h3>サイドバー</h3>
-  <p>ジャンル検索</p>
+<h3>ジャンル検索</h3>
+<% @genres.each do |genre| %>
+  <p>
+    <%= link_to items_path(genre_id: genre.id) do %>
+      <%= genre.name %>
+    <% end %>
+  </p>
+<% end %>
 
 <h3>メインコンテンツ</h3>
   <p>ようこそながのCAKEへ！<br>
   このサイトは、ケーキ販売のECサイトになります。<br>
   会員でない方も商品の閲覧はできますが、<br>
   購入には会員登録が必要になります。</p>
+  
+<h3>新着商品</h3>
+<% @items.each do |item| %>
+  <%= link_to item_path(item) do %>
+    <%= attachment_image_tag item, :image, :fill, 50, 50 %>
+  <% end %><br>
+  <%= item.name %><br>
+  <%= '¥' + item.price.to_s(:delimited) %><br>
+<% end %>
+
+<%= link_to "すべての商品を見る＞", items_path %>

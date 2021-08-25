@@ -11,10 +11,10 @@
 
 <h3><%= @name + '一覧（全' + @count.to_s + '件）' %></h3>
 <% @items.each do |item| %>
-  <%= attachment_image_tag item, :image, :fill, 50, 50 %>
   <%= link_to item_path(item) do %>
-    <%= item.name %>
-  <% end %>
-  <%= '¥' + item.price.to_s(:delimited) %></p>
+    <%= attachment_image_tag item, :image, :fill, 50, 50 %>
+  <% end %><br>
+  <%= item.name %><br>
+  <%= '¥' + item.price.to_s(:delimited) %><br>
 <% end %>
   
