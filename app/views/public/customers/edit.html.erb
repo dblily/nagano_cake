@@ -1,23 +1,47 @@
-<h2>会員情報編集</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
 
-<%= form_with model:@customer, url:customers_path, local:true do |f| %>
-  <p>氏名</p>
-  <%= f.text_field :last_name %>
-  <%= f.text_field :first_name %>
-  <P>フリガナ</P>
-  <%= f.text_field :last_name_kana %>
-  <%= f.text_field :first_name_kana %>
-  <P>郵便番号</P>
-  <%= f.text_field :postal_code %>
-  <P>住所</P>
-  <%= f.text_field :address %>
-  <P>電話番号</P>
-  <%= f.text_field :telephone_number %>
-  <P>メールアドレス</P>
-  <%= f.email_field :email %>
-  
-  <%= f.submit '編集内容を保存' %>
-  
-<% end %>
-
-<p><%= link_to "退会する", customers_leave_path %></p>
+      <h4>会員情報編集</h4>
+      
+      <%= form_with model:@customer, url:customers_path, local:true do |f| %>
+        <table class="table table-borderless">
+          <tr>
+            <td><%= f.label :name, "氏名" %></td>
+            <td><%= f.text_field :last_name %></td>
+            <td><%= f.text_field :first_name %></td>
+          </tr>
+          <tr>
+            <td><%= f.label :name_kana, "フリガナ" %></td>
+            <td><%= f.text_field :last_name_kana %></td>
+            <td><%= f.text_field :first_name_kana %></td>
+          </tr>
+          <tr>
+            <td><%= f.label :postal_code, "郵便番号" %></td>
+            <td><%= f.text_field :postal_code %></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><%= f.label :address, "住所" %></td>
+            <td colspan="2"><%= f.text_field :address, size: 50 %></td>
+          </tr>
+          <tr>
+            <td><%= f.label :telephone_number, "電話番号" %></td>
+            <td><%= f.text_field :telephone_number %></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><%= f.label :email, "メールアドレス" %></td>
+            <td><%= f.email_field :email %></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><%= f.submit '編集内容を保存', class: "btn btn-success text-white" %></td>
+            <td><%= link_to "退会する", customers_leave_path, class: "btn btn-danger text-white" %></td>
+          </tr>
+        </table>
+      <% end %>
+    </div>
+  </div>
+</div>

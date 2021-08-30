@@ -4,9 +4,12 @@ class Admin::HomesController < ApplicationController
     
     if path[:controller] == "admin/orders" && path[:action] == "show"
       order = Order.find_by(id: path[:id])
-      @orders = Order.where(customer_id: order.customer_id)
+      @orders = Order.where(customer_id: order.customer_id).page(params[:page]).reverse_order
+    elsif 
+      path[:controller] == "admin/customers" && path[:action] == "show"
+      @orders = Order.where(customer_id: path[:id]).page(params[:page]).reverse_order
     else
-      @orders = Order.all
+      @orders = Order.page(params[:page]).reverse_order
     end
   end
   

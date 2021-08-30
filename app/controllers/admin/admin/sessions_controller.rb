@@ -4,9 +4,10 @@ class Admin::Admin::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
-  # def new
-  #   super
-  # end
+  def new
+    super
+    flash.delete(:notice)
+  end
 
   # POST /resource/sign_in
   def create
@@ -15,9 +16,10 @@ class Admin::Admin::SessionsController < Devise::SessionsController
   end
   
   # DELETE /resource/sign_out
-  # def destroy
-  #   super
-  # end
+  def destroy
+    super
+    flash.delete(:notice)
+  end
 
   def after_sign_out_path_for(resource)
     new_admin_session_path

@@ -8,10 +8,10 @@ class Admin::OrdersController < ApplicationController
     order.update(order_params)
     if order.status == "confirmation"
       order.order_items.update_all(making_status: "waite_making")
-      redirect_to admin_order_path(order), notice: 'successfully'
+      redirect_to admin_order_path(order), notice: '更新しました'
     else
       @order = order
-      render :show, alert: 'error'
+      redirect_to admin_order_path(order), notice: '更新しました'
     end
   end
   

@@ -1,33 +1,45 @@
-<% if flash[:notice] %>
-  <p><%= flash[:notice] %></p>
-<% end %>
-
-<% if @genre.errors.any? %>
-    <h3><%= @genre.errors.count %> error prohibited this genre from being saved:</h3>
-    <ul>
-      <% @genre.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
+<div class="container">
+  <div class="row">
+    <div class="col-md-10">
+      <div id="alert">
+        <% if @genre.errors.any? %>
+          <p>すべての項目を入力してください</p>
+         <% end %>
+      </div>
+      <h4>ジャンル一覧・追加</h4>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-7">
+      <%= form_with model: [:admin, @genre], local:true do |f| %>
+        <table class="table table-borderless">
+          <tr>
+            <td>ジャンル名</td>
+            <td><%= f.text_field :name %></td>
+            <td><%= f.submit '新規登録', class: "btn btn-success text-white" %></td>
+          </tr>
+        </table>
       <% end %>
-    </ul>
- <% end %>
-
-<h2>ジャンル一覧・追加</h2>
-
-<%= form_with model: [:admin, @genre], local:true do |f| %>
-  <p>ジャンル名</p>
-  <%= f.text_field :name %>
-  <%= f.submit '新規登録' %>
-<% end %>
-
-<table>
-  <tr>
-    <th>ジャンル</th>
-    <th></th>
-  </tr>
-<% @genres.each do |genre| %>
-  <tr>
-    <td><%= genre.name %></td>
-    <td><%= link_to "編集する", edit_admin_genre_path(genre.id) %></td>
-  </tr>
-<% end %>
-</table>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-md-4">
+      <table class="table">
+        <thead class="thead-light">
+          <tr>
+            <th>ジャンル</th>
+            <th></th>
+          </tr>
+        </thead>
+      <% @genres.each do |genre| %>
+        <tr>
+          <td><%= genre.name %></td>
+          <td><%= link_to "編集する", edit_admin_genre_path(genre.id), class: "btn btn-success btn-sm text-white" %></td>
+        </tr>
+      <% end %>
+      </table>
+    </div>
+  </div>
+</div>

@@ -27,6 +27,7 @@ class Admin::Admin::RegistrationsController < Devise::RegistrationsController
   # DELETE /resource
   # def destroy
   #   super
+  # flash.delete(:notice)
   # end
 
   # GET /resource/cancel

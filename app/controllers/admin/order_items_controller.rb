@@ -13,7 +13,7 @@ class Admin::OrderItemsController < ApplicationController
       order.update(status: "preparing")
     end
     
-    redirect_to admin_order_path(order_item.order_id), notice: 'successflly'
+    redirect_to admin_order_path(order_item.order_id), notice: '更新しました'
   end
   
   private

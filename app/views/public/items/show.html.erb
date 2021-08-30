@@ -1,14 +1,36 @@
-<% if flash[:alert] %>
-  <p><%= flash[:alert] %></p>
-<% end %>
+<div class="container">
+  <div class="row">
 
-<%= attachment_image_tag @item, :image, :fill, 50, 50 %>
-<h2><%= @item.name %></h2>
-<p><%= @item.introduction %></p>
-<p>¥<%= @item.add_tax_price.to_s(:delimited) %>(税込)</p>
+    <div class="col-md-3">
+      <div class="box_genre">
+        <div class="box-title"><h5>ジャンル検索</h5></div>
+        <% @genres.each do |genre| %>
+          <p class="p_genre">
+            <%= link_to items_path(genre_id: genre.id) do %>
+              <%= genre.name %>
+            <% end %>
+          </p>
+        <% end %>
+      </div>
+    </div>
 
-<%= form_with model:@cart_item, url:cart_items_path, local:true do |f| %>
-  <%= f.select :amount, *[1..5], :prompt => "個数選択" %>
-  <%= f.hidden_field :item_id, :value => @item.id %>
-  <%= f.submit 'カートに入れる' %>
-<% end %>
+    <div class="col-md-3">
+      <%= attachment_image_tag @item, :image, :fill, 250, 170 %>
+    </div>
+    
+    <div class="col-md-5">
+      <h3><%= @item.name %></h3>
+      <p><%= @item.introduction %></p>
+      <br>
+      <br>
+      <p><%= '¥' + @item.add_tax_price.to_s(:delimited) %>(税込)</p>
+      <br><br>
+      
+      <%= form_with model:@cart_item, url:cart_items_path, local:true do |f| %>
+        <%= f.select :amount, *[1..5], :prompt => "個数選択" %>
+        <%= f.hidden_field :item_id, :value => @item.id %>
+        <%= f.submit 'カートに入れる', class: "btn btn-success text-white" %>
+      <% end %>
+    </div>
+  </div>
+</div>

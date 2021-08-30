@@ -1,4 +1,6 @@
 class Public::CartItemsController < ApplicationController
+  before_action :authenticate_customer!
+  
   def index
     @cart_items = CartItem.where(customer_id: current_customer.id)
   end
@@ -15,7 +17,7 @@ class Public::CartItemsController < ApplicationController
     
       cart_item.customer_id = current_customer.id
       cart_item.save
-      redirect_to cart_items_path, notice: 'successfully'
+      redirect_to cart_items_path, notice: 'カートに商品を追加しました'
       
     else
       redirect_to item_path(params[:cart_item][:item_id]), alert: '個数を選択してください'
@@ -25,7 +27,7 @@ class Public::CartItemsController < ApplicationController
   def update
     cart_item = CartItem.find(params[:id])
     cart_item.update(cart_item_params)
-    redirect_to cart_items_path, notice: 'successfully'
+    redirect_to cart_items_path, notice: '更新しました'
   end
   
   def destroy
