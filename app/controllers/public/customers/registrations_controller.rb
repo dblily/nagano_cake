@@ -5,10 +5,9 @@ class Public::Customers::RegistrationsController < Devise::RegistrationsControll
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  def new
-    super
-    flash.delete(:notice)
-  end
+  # def new
+  #   super
+  # end
 
   # POST /resource
   def create
